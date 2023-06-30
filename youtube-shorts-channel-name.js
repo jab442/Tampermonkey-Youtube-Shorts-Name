@@ -36,10 +36,18 @@
             url: youtubeURL,
             onload: function(response) {
                 var data = response.responseText;
-                var match = data.match(/\/@([^"]*)/);
+                var match = data.match(/\/@([^\?""]*)/);
                 if (match && match[1]) {
                     var result = match[1];
-                    descendant.after(`<div style="padding-left:10px">${result}</div>`);
+                    const html=
+                          `<div style="padding-left:10px">
+                          <a href="https://www.youtube.com/@${result}" style="text-decoration: none; color: #aaa;"
+                          onmouseover="this.style.color='#f1f1f1';"
+                          onmouseout="this.style.color='#aaa';">
+                          ${result}
+                          </a>
+                          </div>`
+                    descendant.after(html);
                 } else {
                     console.log("Pattern not found in the response data.");
                 }
