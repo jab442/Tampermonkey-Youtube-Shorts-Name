@@ -14,13 +14,16 @@
 (function() {
     'use strict';
 
-    // Your code here...
-    setTimeout(function(){
-        let videos = document.querySelectorAll(".ytd-rich-grid-slim-media #thumbnail");
+    let videos;
+    let intervalId = setInterval(function(){
+        videos = document.querySelectorAll(".ytd-rich-grid-slim-media #thumbnail");
+        if(videos.length > 0) {
+            clearInterval(intervalId); // clear interval if videos.length > 0
+        }
         for(let video of videos){
             makeRequest(video);
         }
-    }, 3000);
+    }, 1000);
 
     function makeRequest(video) {
         let href = video.getAttribute("href");
@@ -44,4 +47,3 @@
         });
     }
 })();
-
