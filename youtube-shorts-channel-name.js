@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube Shorts channel name
-// @namespace    http://tampermonkey.net/
-// @version      0.1
+// @namespace    https://github.com/jab442/Tampermonkey-Youtube-Shorts-Name
+// @version      0.2
 // @description  Add Channel name to Youtube shorts
 // @author       You
 // @match        https://www.youtube.com/
@@ -16,12 +16,11 @@
 
     let videos;
     let intervalId = setInterval(function(){
-        videos = document.querySelectorAll(".ytd-rich-grid-slim-media #thumbnail");
-        if(videos.length > 0) {
-            clearInterval(intervalId); // clear interval if videos.length > 0
-        }
-        for(let video of videos){
-            makeRequest(video);
+        if(videos !== document.querySelectorAll(".ytd-rich-grid-slim-media #thumbnail")){
+            videos = document.querySelectorAll(".ytd-rich-grid-slim-media #thumbnail");
+            for(let video of videos){
+                makeRequest(video);
+            }
         }
     }, 1000);
 
@@ -39,8 +38,9 @@
                 var match = data.match(/\/@([^\?""]*)/);
                 if (match && match[1]) {
                     var result = match[1];
+                    descendant.siblings(".tampermonkey").remove();
                     const html=
-                          `<div style="padding-left:10px">
+                          `<div class="tampermonkey" style="padding-left:10px">
                           <a href="https://www.youtube.com/@${result}" style="text-decoration: none; color: #aaa;"
                           onmouseover="this.style.color='#f1f1f1';"
                           onmouseout="this.style.color='#aaa';">
