@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Youtube Shorts channel name
 // @namespace    https://github.com/jab442/Tampermonkey-Youtube-Shorts-Name
-// @version      0.2.1
+// @version      0.2.2
 // @description  Add Channel name to Youtube shorts
-// @author       jab442
+// @author       You
 // @match        https://www.youtube.com/
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_xmlhttpRequest
@@ -30,11 +30,6 @@
         var descendant = ancestor.find(".inline-metadata-item");
         const youtubeURL = "https://www.youtube.com" + href;
 
-        // Check if the tampermonkey class element already exists
-        if (descendant.siblings(".tampermonkey").length > 0) {
-            return; // if it exists, don't make the request
-        }
-
         GM_xmlhttpRequest({
             method: 'GET',
             url: youtubeURL,
@@ -59,4 +54,13 @@
             }
         });
     }
+    $(".ytd-logo").click(()=>{
+        setTimeout(()=>{
+            $(".processed").removeClass("processed");
+            let videos = document.querySelectorAll(".ytd-rich-grid-slim-media #thumbnail");
+            for (let video of videos) {
+             makeRequest(video);
+        }
+        },2000)
+    });
 })();
