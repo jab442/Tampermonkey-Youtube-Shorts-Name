@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Youtube Shorts channel name
 // @namespace    https://github.com/jab442/Tampermonkey-Youtube-Shorts-Name
-// @version      0.2.2
+// @version      0.2.3
 // @description  Add Channel name to Youtube shorts
 // @author       You
-// @match        https://www.youtube.com/
+// @match        https://www.youtube.com/*
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @grant        GM_xmlhttpRequest
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js
