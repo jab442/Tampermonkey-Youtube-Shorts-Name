@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Youtube Shorts channel name
 // @namespace    https://github.com/jab442/Tampermonkey-Youtube-Shorts-Name
-// @version      0.2.4
+// @version      0.2.5
 // @description  Add Channel name to Youtube shorts
 // @author       You
 // @match        https://www.youtube.com/*
@@ -15,6 +15,7 @@
     'use strict';
 
     let videos;
+    let intervalYtLogo;
 
     let intervalId = setInterval(function(){
         let videos = document.querySelectorAll(".ytd-rich-grid-slim-media #thumbnail:not(.processed)");
@@ -55,7 +56,9 @@
         });
     }
     $(".ytd-logo").click(()=>{
-        setInterval(()=>{
+        clearInterval(intervalId);
+        clearInterval(intervalYtLogo);
+        intervalYtLogo=setInterval(()=>{
             $(".processed").removeClass("processed");
             let videos = document.querySelectorAll(".ytd-rich-grid-slim-media #thumbnail");
             for (let video of videos) {
